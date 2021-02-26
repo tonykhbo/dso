@@ -1,0 +1,16 @@
+apiVersion: redhatgov.io/v1alpha1
+kind: Gitea
+metadata:
+  name: gitea
+spec:
+  gitea:
+    expose:
+      kind: Route
+      ssl: true
+    volumeSize: 4Gi
+    resources:
+      memory:
+        limit: 2Gi
+  persistent: true
+  postgresql:
+    volumeSize: 10Gi
