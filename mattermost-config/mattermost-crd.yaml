@@ -11,5 +11,5 @@ spec:
     port: 5432
   authentication:
     keycloak:
-      realmUrl: keycloak.{{ ARGO_APP_NAMESPACE }}.svc.cluster.local/auth/realms/openshift
+      realmUrl: $ARGO_APP_NAMESPACE
       secret: mattermost
