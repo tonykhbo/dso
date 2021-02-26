@@ -5,7 +5,7 @@ metadata:
   namespace: openshift-marketplace
 spec:
   sourceType: grpc
-  image: quay.io/redhatgov/operator-catalog: latest
+  image: quay.io/redhatgov/operator-catalog:latest
   displayName: Red Hat NAPS Community Operators
   publisher: RedHatGov
   icon:
