@@ -4,12 +4,11 @@ metadata:
   name: apps
 spec:
   destination:
+    name: apps
     namespace: dso
-    server: api-crc-testing:6443
-  project: devsecops
+    server: 'api-crc-testing:6443'
   source:
-    helm:
-      valueFiles:
-      - values.yaml
     path: helm-catalogsource
-    repoURL: https://github.com/tonykhbo/dso.git
+    repoURL: 'https://github.com/tonykhbo/dso.git'
+    targetRevision: HEAD
+  project: devsecops
