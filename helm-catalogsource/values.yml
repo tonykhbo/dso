@@ -1,0 +1,2 @@
+spec:
+  image: quay.io/redhatgov/operator-catalog:latest
