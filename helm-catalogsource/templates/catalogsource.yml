@@ -5,7 +5,7 @@ metadata:
   namespace: openshift-marketplace
 spec:
   sourceType: grpc
-  image: {{ .Values.spec.image }}
+  image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
   displayName: Red Hat NAPS Community Operators
   publisher: RedHatGov
   icon:
