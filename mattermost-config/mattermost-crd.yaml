@@ -11,5 +11,6 @@ spec:
     port: 5432
   authentication:
     keycloak:
-      realmUrl: $ARGOCD_APP_NAMESPACE
+    //need better solution for dynamic namespace name here
+      realmUrl: keycloak.dso.svc.cluster.local
       secret: mattermost
