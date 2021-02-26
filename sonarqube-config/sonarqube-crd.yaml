@@ -1,0 +1,13 @@
+apiVersion: redhatgov.io/v1alpha1
+kind: Sonarqube
+metadata:
+  name: sonarqube
+spec:
+  persistent: true
+  postgresql:
+    volumeSize: 4Gi
+  sonarqube:
+    expose:
+      kind: Route
+      ssl: true
+    volumeSize: 4Gi
