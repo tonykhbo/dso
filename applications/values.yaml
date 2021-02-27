@@ -1,0 +1,13 @@
+# Default values for applications.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+catalogsource:
+  destinationNamespace: openshift-marketplace
+  testValue1: true
+
+subscriptions:
+  testValue2: true
+
+config:
+  testValue3: true

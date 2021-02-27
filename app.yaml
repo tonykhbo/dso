@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: super-cool-app
+  namespace: default
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/tonykhbo/dso
+    chart: applications
+    targetRevision: HEAD
+    helm:
+      releaseName: super-cool-app
+      valueFiles:
+        - values.yaml
+      values: |
+        catalogsource:
+          new: value
+        subscriptions:
+          more: values
+        config:
+          yo: wassup
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

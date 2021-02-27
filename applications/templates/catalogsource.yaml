@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: catalogsource
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/tonykhbo/dso
+    chart: catalogsource
+    targetRevision: HEAD
+    helm:
+      releaseName: catalogsource
+      valueFiles:
+        - values.yaml
+{{- with .Values.catalogsource }}
+      values: |
+        {{- toYaml . | nindent 8 }}
+{{- end }}
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: {{ .Values.catalogsource.destinationNamespace }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
