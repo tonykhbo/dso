@@ -12,5 +12,5 @@ spec:
   authentication:
     keycloak:
     # need better solution for dynamic namespace name here
-      realmUrl: keycloak.dso.svc.cluster.local
+      realmUrl: keycloak.{{ .Values.namespace }}.svc.cluster.local
       secret: mattermost
