@@ -4,6 +4,7 @@ metadata:
   name: subscriptions
   annotations:
     argocd.argoproj.io/sync-wave: "2"
+  namespace: {{ .Values.argo.appNamespace }}
 spec:
   project: default
   source:

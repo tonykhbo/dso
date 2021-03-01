@@ -2,6 +2,9 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+argo:
+  appNamespace: openshift-gitops
+
 catalogsource:
   destinationNamespace: openshift-marketplace
   testValue1: true

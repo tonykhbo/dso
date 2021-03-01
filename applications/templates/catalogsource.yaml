@@ -4,6 +4,7 @@ metadata:
   name: catalogsource
   annotations:
     argocd.argoproj.io/sync-wave: "0"
+  namespace: {{ .Values.argo.appNamespace }}
 spec:
   project: default
   source:
