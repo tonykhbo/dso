@@ -17,4 +17,4 @@ items:
       displayName: {{ .Values.rhsso.realmDisplay }}
     instanceSelector:
       matchLabels:
-        app: {{ rhsso_app_label }}
+        app: {{ .Values.rhsso.appLabel }}
