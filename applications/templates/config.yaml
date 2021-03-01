@@ -8,7 +8,7 @@ metadata:
 spec:
   project: default
   source:
-    path: ../catalogsource
+    path: catalogsource
     repoURL: https://github.com/tonykhbo/dso
     chart: config
     targetRevision: {{ .Values.argo.targetRevision }}

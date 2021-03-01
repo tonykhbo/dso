@@ -8,7 +8,7 @@ metadata:
 spec:
   project: default
   source:
-    path: ../subscriptions
+    path: subscriptions
     repoURL: https://github.com/tonykhbo/dso
     chart: subscriptions
     targetRevision: {{ .Values.argo.targetRevision }}
