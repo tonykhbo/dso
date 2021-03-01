@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: https://github.com/tonykhbo/dso
     chart: catalogsource
-    targetRevision: HEAD
+    targetRevision: {{ .Values.argo.targetRevision }}
     helm:
       releaseName: catalogsource
       valueFiles:

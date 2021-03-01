@@ -4,6 +4,7 @@
 
 argo:
   appNamespace: openshift-gitops
+  targetRevision: app-of-apps-tobo
 
 catalogsource:
   destinationNamespace: openshift-marketplace
@@ -16,4 +17,5 @@ config:
   testValue3: true
 
 cluster:
-  server: https://api.crc.testing:6443
+  server: kubernetes.default.svc
+  destinationNamespace: dso

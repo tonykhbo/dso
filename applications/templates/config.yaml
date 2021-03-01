@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: https://github.com/tonykhbo/dso
     chart: config
-    targetRevision: HEAD
+    targetRevision: {{ .Values.argo.targetRevision }}
     helm:
       releaseName: config
       valueFiles:
@@ -21,7 +21,7 @@ spec:
 {{- end }}
   destination:
     server: {{ .Values.cluster.server }}
-    namespace: dso
+    namespace: {{ .Values.cluster.destinationNamespace }}
   syncPolicy:
     automated:
       prune: true
