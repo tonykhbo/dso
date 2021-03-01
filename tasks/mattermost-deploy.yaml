@@ -1,0 +1,2 @@
+argocd app create mattermost --repo https://github.com/tonykhbo/dso.git --path mattermost-config--dest-server https://api-crc-testing:6443 --dest-namespace dso --parameter spec.authentication.keycloak.realmUrl=keycloak.dso
+argocd app create mattermost --repo https://github.com/tonykhbo/dso.git --path mattermost-config --dest-namespace dso --dest-server api-crc-testing:6443 --parameter spec.authentication.keycloak.realmUrl=keycloak.dso
