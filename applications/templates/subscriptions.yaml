@@ -10,7 +10,6 @@ spec:
   source:
     path: subscriptions
     repoURL: https://github.com/tonykhbo/dso
-    chart: subscriptions
     targetRevision: {{ .Values.argo.targetRevision }}
     helm:
       releaseName: subscriptions
