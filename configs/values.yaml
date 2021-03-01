@@ -1,10 +1,9 @@
 namespace: dso
 
 rhsso: 
-  projectName: devsecops
   projectDisplay: DevSecOps Common Resources
   appName: rhsso
   appLabel: rhsso
-  realmName: openshift
+  realmName: openshift-realm
   realmDisplay: RH-SSO OpenShift Realm
   subDomain: '{{ full_cluster_name }}'
