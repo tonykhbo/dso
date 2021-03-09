@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: tekton
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+  namespace: {{ .Values.argo.appNamespace }}
+spec:
+  project: default
+  source:
+    path: tekton
+    repoURL: https://github.com/tonykhbo/dso
+    targetRevision: {{ .Values.argo.targetRevision }}
+    helm:
+      releaseName: tekton
+      valueFiles:
+        - values.yaml
+{{- with .Values.tekton }}
+      values: |
+        {{- toYaml . | nindent 8 }}
+{{- end }}
+  destination:
+    server: {{ .Values.cluster.server }}
+    namespace: {{ .Values.cluster.destinationNamespace }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

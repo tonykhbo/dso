@@ -18,3 +18,4 @@ items:
     instanceSelector:
       matchLabels:
         app: {{ .Values.rhsso.appLabel }}
+
