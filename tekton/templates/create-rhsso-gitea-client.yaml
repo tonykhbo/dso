@@ -17,7 +17,7 @@ spec:
   - name: GITEA_DOMAIN
     description: Your url for GITEA
     type: string
-    default: "https://gitea-dso.apps-crc.testing/"
+    default: "https://gitea-dso.apps-crc.testing"
   - name: CLIENT_NAME
     description: Keycloak Client Name
     type: string
