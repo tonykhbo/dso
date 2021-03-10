@@ -39,7 +39,7 @@ spec:
       image: 'quay.io/openshift/origin-cli:$(params.VERSION)'
       script: |
         oc login --insecure-skip-tls-verify -u $secretUSERNAME -p $secretPASSWORD https://api.crc.testing:6443
-        oc get secret router-ca -n openshift-ingress-operator -o yaml | sed 's/namespace: openshift-ingress-operator/namespace: $secretNAMESPACE/' | oc create -f -
+        oc get secret router-ca -n openshift-ingress-operator -o yaml | sed "s/namespace: openshift-ingress-operator/namespace: $secretNAMESPACE/" | oc create -f -
 
 
 
