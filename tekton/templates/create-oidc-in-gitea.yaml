@@ -1,0 +1,62 @@
+---
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: create-oidc-in-gitea
+  labels:
+    app.kubernetes.io/version: "0.1"
+  annotations:
+    tekton.dev/pipelines.minVersion: "0.12.1"
+    tekton.dev/tags: cli
+    tekton.dev/displayName: "Create OIDC in Gitea"
+spec:
+  description: >-
+    This task grabs the current pod identifier, rsh in that, and creates the oidc endpoint via the api.
+  params:
+  - name: AUTH_NAME
+    description: Auth Source Name
+    type: string
+    default: "keycloakoidc"
+  - name: PROVIDER
+    description: Provider Type
+    type: string
+    default: "openidConnect"
+  - name: PROVIDER_KEY
+    description: Keycloak Provider Key
+    type: string
+    default: "openshift"
+  - name: PROVIDER_SECRET
+    description: Keycloak Provider Secret
+    type: string
+    default: "openshift"
+  - name: PROVIDER_URL
+    description: Keycloak Auto Discovery URL
+    type: string
+    default: "https://keycloak-dso.apps-crc.testing"
+  - name: PROVIDER_REALM
+    description: Keycloak Realm
+    type: string
+    default: "openshift-realm"
+  - name: VERSION
+    description: The OpenShift Version to use
+    type: string
+    default: "4.6"
+  resources:
+    inputs:
+      - name: source
+        type: git
+        optional: true
+  steps:
+    - name: Create OIDC in Gitea
+      env:
+        - name: secretNAMESPACE
+          valueFrom:
+            secretKeyRef:
+              key: namespace
+              name: admin-creds
+      image: quay.io/openshift/origin-cli:$(params.VERSION)
+      script: |
+        oc project $secretNAMESPACE
+        POD=$(oc get pod -l app=gitea -o jsonpath="{.items[0].metadata.name}")
+        oc rsh $POD
+        ./gitea admin auth add-oauth --name $(params.OIDC_NAME) --provider $(params.PROVIDER) --key $(params.PROVIDER_KEY) --secret $(params.PROVIDER_SECRET) --auto-discover-url $(params.PROVIDER_URL)/auth/realms/$(params.PROVIDER_REALM)/.well-known/openid-configuration --config=/home/gitea/conf/app.ini
