@@ -2,7 +2,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
-  name: openshift-client
+  name: oc-copy-router-ca
   labels:
     app.kubernetes.io/version: "0.1"
   annotations:
