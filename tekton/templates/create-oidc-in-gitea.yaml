@@ -11,7 +11,8 @@ metadata:
     tekton.dev/displayName: "Create OIDC in Gitea"
 spec:
   description: >-
-    This task grabs the current pod identifier, rsh in that, and creates the oidc endpoint via the api.
+    This task grabs the current pod identifier, 
+    rsh in it, and creates the oidc endpoint via the api.
   params:
   - name: AUTH_NAME
     description: Auth Source Name
@@ -47,7 +48,7 @@ spec:
         type: git
         optional: true
   steps:
-    - name: Create OIDC in Gitea
+    - name: create-oidc-in-gitea
       env:
         - name: secretNAMESPACE
           valueFrom:
