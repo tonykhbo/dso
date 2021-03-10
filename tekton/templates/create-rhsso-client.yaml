@@ -30,6 +30,10 @@ spec:
     description: Keycloak Client Secret
     type: string
     default: "openshift"
+  - name: VERSION
+    description: The OpenShift Version to use
+    type: string
+    default: '4.6'
   steps:
     - name: create-keycloak-client
       env:
