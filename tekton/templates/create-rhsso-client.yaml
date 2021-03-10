@@ -14,8 +14,12 @@ spec:
     This task creates the Keycloak Client used by the RHSSO Operator.
     It uses the namespace defined in admin-creds secret (this was created by the create-admin-secret task).
   params:
-  - name: SUBDOMAIN
-    description: Your Openshift Subdomain
+  - name: DOMAIN
+    description: Your Openshift Domain
+    type: string
+    default: "crc.testing"
+  - name: APPS_SUBDOMAIN
+    description: Your Openshift Apps Subdomain 
     type: string
     default: "apps-crc.testing"
   - name: CLIENT_NAME
@@ -65,10 +69,10 @@ spec:
             clientAuthenticatorType: client-secret
             publicClient: false
             redirectUris:
-              - "https://console-openshift-console.apps.$(params.SUBDOMAIN)/*"
-              - "https://api.$(params.SUBDOMAIN)/*"
-              - "https://oauth-openshift.apps.$(params.SUBDOMAIN)/*"
-            rootUrl: 'https://console-openshift-console.apps.$(params.SUBDOMAIN)/'
+              - "https://console-openshift-console.$(params.APPS_SUBDOMAIN)/*"
+              - "https://api.$(params.DOMAIN)/*"
+              - "https://oauth-openshift.$(params.APPS_SUBDOMAIN)/*"
+            rootUrl: 'https://console-openshift-console.$(params.APPS_SUBDOMAIN)/'
             protocol: openid-connect
             standardFlowEnabled: true
         EOF
