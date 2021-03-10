@@ -46,7 +46,7 @@ spec:
       script: |
         oc project $secretNAMESPACE
         oc apply -f - << EOF
-        - apiVersion: keycloak.org/v1alpha1
+        apiVersion: keycloak.org/v1alpha1
         kind: KeycloakClient
         metadata:
           name: openshift-client
