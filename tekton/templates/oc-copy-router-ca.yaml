@@ -8,7 +8,7 @@ metadata:
   annotations:
     tekton.dev/pipelines.minVersion: "0.12.1"
     tekton.dev/tags: cli
-    tekton.dev/displayName: "openshift client"
+    tekton.dev/displayName: "Copy Router CA"
 spec:
   description: >-
     This tasks uses an existing secret, admin-creds, to copy the router-ca from
