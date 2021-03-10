@@ -21,11 +21,11 @@ spec:
   - name: CLIENT_NAME
     description: Keycloak Client Name
     type: string
-    default: "openshift"
+    default: "gitea"
   - name: CLIENT_ID
     description: Keycloak Client ID
     type: string
-    default: "openshift"
+    default: "gitea"
   - name: CLIENT_SECRET
     description: Keycloak Client Secret
     type: string
@@ -49,7 +49,7 @@ spec:
         apiVersion: keycloak.org/v1alpha1
         kind: KeycloakClient
         metadata:
-          name: openshift-client
+          name: $(params.CLIENT_NAME)
           namespace: $secretNAMESPACE
           labels:
             app: rhsso
