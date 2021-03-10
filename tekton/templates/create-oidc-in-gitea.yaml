@@ -60,4 +60,4 @@ spec:
         oc project $secretNAMESPACE
         POD=$(oc get pod -l app=gitea -o jsonpath="{.items[0].metadata.name}")
         oc rsh $POD
-        ./gitea admin auth add-oauth --name $(params.AUTH_NAME) --provider $(params.PROVIDER) --key $(params.PROVIDER_KEY) --secret $(params.PROVIDER_SECRET) --auto-discover-url $(params.PROVIDER_URL)/auth/realms/$(params.PROVIDER_REALM)/.well-known/openid-configuration --config=/home/gitea/conf/app.ini
+        ./home/gitea admin auth add-oauth --name $(params.AUTH_NAME) --provider $(params.PROVIDER) --key $(params.PROVIDER_KEY) --secret $(params.PROVIDER_SECRET) --auto-discover-url $(params.PROVIDER_URL)/auth/realms/$(params.PROVIDER_REALM)/.well-known/openid-configuration --config=/home/gitea/conf/app.ini
