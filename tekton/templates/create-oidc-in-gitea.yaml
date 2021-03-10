@@ -22,12 +22,12 @@ spec:
     description: Provider Type
     type: string
     default: "openidConnect"
-  - name: PROVIDER_KEY
-    description: Keycloak Provider Key
+  - name: PROVIDER_ID
+    description: Keycloak Provider Client ID
     type: string
-    default: "openshift"
+    default: "gitea"
   - name: PROVIDER_SECRET
-    description: Keycloak Provider Secret
+    description: Keycloak Provider Client Secret
     type: string
     default: "openshift"
   - name: PROVIDER_URL
