@@ -2,7 +2,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
-  name: create-Openshift-keycloak-client
+  name: create-ocp-keycloak-client
   labels:
     app.kubernetes.io/version: "0.1"
   annotations:
