@@ -1,0 +1,71 @@
+---
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: openshift-client
+  labels:
+    app.kubernetes.io/version: "0.1"
+  annotations:
+    tekton.dev/pipelines.minVersion: "0.12.1"
+    tekton.dev/tags: cli
+    tekton.dev/displayName: "openshift client"
+spec:
+  description: >-
+    This task creates the Keycloak Client used by the RHSSO Operator.
+    It uses the namespace defined in admin-creds secret (this was created by the create-admin-secret task).
+  params:
+  - name: SUBDOMAIN
+    description: Your Openshift Subdomain
+    type: string
+    default: "apps-crc.testing"
+  - name: CLIENT_NAME
+    description: Keycloak Client Name
+    type: string
+    default: "openshift"
+  - name: CLIENT_ID
+    description: Keycloak Client ID
+    type: string
+    default: "openshift"
+  - name: CLIENT_SECRET
+    description: Keycloak Client Secret
+    type: string
+    default: "openshift"
+  steps:
+    - name: create-keycloak-client
+      env:
+        - name: secretNAMESPACE
+          valueFrom:
+            secretKeyRef:
+              key: namespace
+              name: admin-creds
+      image: quay.io/openshift/origin-cli:$(params.VERSION)
+      script: |
+        oc project $secretNAMESPACE
+        oc apply -f - << EOF
+        - apiVersion: keycloak.org/v1alpha1
+        kind: KeycloakClient
+        metadata:
+          name: openshift-client
+          namespace: $secretNAMESPACE
+          labels:
+            app: rhsso
+        spec:
+          realmSelector:
+            matchLabels:
+              app: rhsso
+          client:
+            clientId: $(params.CLIENT_ID)
+            secret: $(params.CLIENT_SECRET)
+            name: $(params.CLIENT_NAME)
+            enabled: true
+            clientAuthenticatorType: client-secret
+            publicClient: false
+            redirectUris:
+              - "https://console-openshift-console.apps.$(params.SUBDOMAIN)/*"
+              - "https://api.$(params.SUBDOMAIN)/*"
+              - "https://oauth-openshift.apps.$(params.SUBDOMAIN)/*"
+            rootUrl: 'https://console-openshift-console.apps.$(params.SUBDOMAIN)/'
+            protocol: openid-connect
+            standardFlowEnabled: true
+        EOF
+        
