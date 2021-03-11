@@ -25,7 +25,7 @@ spec:
   - name: CLIENT_ID
     description: Keycloak Client ID
     type: string
-    default: "gitea"
+    default: "quay"
   - name: CLIENT_SECRET
     description: Keycloak Client Secret
     type: string
