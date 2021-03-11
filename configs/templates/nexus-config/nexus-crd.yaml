@@ -6,10 +6,10 @@ spec:
   persistent: true
   nexus:
     allowAnonymousAccess: true
-    oauth:
-      enabled: true
-      bypassAuthFor:
-      - '/repository'
+    # oauth:
+    #   enabled: true
+    #   bypassAuthFor:
+    #   - '/repository'
     expose:
       ssl: true
       kind: Route
