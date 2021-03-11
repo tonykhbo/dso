@@ -2,26 +2,26 @@
 apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
-  name: create-gitea-keycloak-client
+  name: create-quay-keycloak-client
   labels:
     app.kubernetes.io/version: "0.1"
   annotations:
     tekton.dev/pipelines.minVersion: "0.12.1"
     tekton.dev/tags: cli
-    tekton.dev/displayName: "Create Gitea Keycloak Client"
+    tekton.dev/displayName: "Create Quay Keycloak Client"
 spec:
   description: >-
     This task creates the Keycloak Client used by the RHSSO Operator.
     It uses the namespace defined in admin-creds secret (this was created by the create-admin-secret task).
   params:
   - name: DOMAIN
-    description: Your url for GITEA
+    description: Your url for the Quay Ecosystem
     type: string
-    default: "https://gitea-dso.apps-crc.testing"
+    default: "https://quayecosystem-quay-dso.apps-crc.testing/"
   - name: CLIENT_NAME
     description: Keycloak Client Name
     type: string
-    default: "gitea"
+    default: "quay"
   - name: CLIENT_ID
     description: Keycloak Client ID
     type: string
