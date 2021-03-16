@@ -11,7 +11,7 @@ spec:
   source:
     path: applications
     repoURL: 'https://github.com/tonykhbo/dso'
-    targetRevision: app-of-apps-tobo
+    targetRevision: main
     helm:
       releaseName: super-cool-app
       valueFiles:
