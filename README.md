@@ -35,9 +35,27 @@ The tekton tasks and pipeline resources are also made available via ArgoCD and o
 
 For configuring the applications to work with each other, we utilize tekton tasks to create a modular approach. The tasks define default variables that are easily customized by the user when they create a pipeline. By having a task for each part, we modularize the automation, thus allowing us to create and add additional pieces of automation - GitOps style. Tasks are easy to test via the form builder in Openshift Pipelines and also tremendously easy to troubleshoot. 
 
+## Disclaimer
+
+Currently the way Openshift GitOps is handled in Openshift, the argocd environment utilizes the ```argocd-cluster-argocd-application-controller service account``` to manage all deployemnts. However, by default the service account only has access to the openshift-gitops namespace. See here: 
+https://github.com/argoproj-labs/argocd-operator/issues/200
+
+
+In order for it to manage other openshift namespaces, you must give it cluster-admin privileges. See here: https://argocd-operator.readthedocs.io/en/latest/install/openshift/#rbac
+
+TLDR; Run this command: 
+
+```
+oc adm policy add-cluster-role-to-user cluster-admin -z argocd-cluster-argocd-application-controller -n openshift-gitops
+```
+
+The alternative, which is a best practice, is to register your Openshift environment within ArgoCD using an admin account. Instead of using the default kubernetes url: https://kubernetes.default.svc, you can select your cluster url instead. 
+
 ## Setup 
 
 Deploy ArgoCD into your cluster via the ArgoCD operator or Openshift GitOps operator.
+
+See [disclaimer](##disclaimer) above.
 
 Apply the ArgoCD App Resource inside the ArgoCD **Create New Application** section.
 
