@@ -7,9 +7,9 @@
 
 ## About
 
-This is an ArgoCD App of Apps deployment represented in helm charts. It deploys RHSSO, Gitea, and Quay. This is App of App structure: 
+This is an ArgoCD App of Apps deployment represented in helm charts. It deploys RHSSO, Gitea, and Quay. This is the App of App structure: 
 
-    -- applications (Parent)
+    -- applications (Parent App)
     |-- catalogsource (Child App)
     |-- configs (Child App)
     |   |-- gitea-config
