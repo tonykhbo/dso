@@ -16,4 +16,6 @@ subscriptions:
 config:
   testValue3: true
 
-
+cluster:
+  server: https://kubernetes.default.svc
+  destinationNamespace: dso

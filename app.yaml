@@ -21,9 +21,8 @@ spec:
           new: value
         subscriptions:
           more: values
-        cluster:
-          server: https://kubernetes.default.svc
-          destinationNamespace: dso
+        config:
+          yo: wassup
   project: default
   syncPolicy:
     automated:
