@@ -77,7 +77,7 @@ spec:
 
 For custom configurations, refer to the values.yaml file available for the Parent App or Child Apps. 
 
-To configure the integration between the Child Apps, see README in the tekton directory. 
+To configure the integration between the Child Apps, see README in the [tekton directory](https://github.com/tonykhbo/dso/tree/app-of-apps-tobo/tekton). 
 
 ## Credentials
 
