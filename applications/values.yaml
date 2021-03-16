@@ -17,5 +17,5 @@ config:
   testValue3: true
 
 cluster:
-  server: https://api.crc.testing:6443
+  server: https://kubernetes.default.svc
   destinationNamespace: dso
