@@ -3,12 +3,12 @@ To test a task in Openshift, you can navigate to the Pipelines tab of the Dashbo
 When we configure our pipeline, we will define the tasks in this directory in the following order:
 
 
-        1|-- oc-copy-router-ca-task
-            2|-- patch-gitea-deployment-ca-task
         1|-- create-admin-secret-task
+            2|-- oc-copy-router-ca-task
                 3|-- create-rhsso-ocp-client-task
                 3|-- create-rhsso-quay-client-task
                 3|-- create-rhsso-gitea-client-task
+                3|-- patch-gitea-deployment-ca-task
                     4|-- create-oidc-in-gitea-task
 
 After creating the pipeline and editting your variables to suit your environment, you can start the pipeline. 
