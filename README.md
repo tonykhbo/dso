@@ -1,7 +1,9 @@
 ## Table of contents
 
 1. [About](##about)
-2. [Setup](#setup)
+2. [Setup](##setup)
+3. [Credentials](##credentials)
+
 
 ## About
 
@@ -77,4 +79,7 @@ For custom configurations, refer to the values.yaml file available for the Paren
 
 To configure the integration between the Child Apps, see README in the tekton directory. 
 
+## Credentials
+
+The username/password credentials for the child apps are located in the corresponding namespace (default is dso) > secret. 
 
