@@ -37,7 +37,7 @@ For configuring the applications to work with each other, we utilize tekton task
 
 ## Disclaimer
 
-Currently the way Openshift GitOps is handled in Openshift, the argocd environment utilizes the ```argocd-cluster-argocd-application-controller service account``` to manage all deployemnts. However, by default the service account only has access to the openshift-gitops namespace. See here: 
+Currently the way Openshift GitOps is handled in Openshift, the argocd environment utilizes the ```argocd-cluster-argocd-application-controller service account``` to manage all deployments. However, by default the service account only has access to the openshift-gitops namespace. See here:
 https://github.com/argoproj-labs/argocd-operator/issues/200
 
 
