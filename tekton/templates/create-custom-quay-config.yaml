@@ -1,0 +1,93 @@
+---
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: create-quay-config-yaml
+  labels:
+    app.kubernetes.io/version: "0.1"
+  annotations:
+    tekton.dev/pipelines.minVersion: "0.12.1"
+    tekton.dev/tags: cli
+    tekton.dev/displayName: "Create Custom Quay config bundle"
+spec:
+  description: >-
+    This task assists with the creation of the quay config bundle used for deploying quay. 
+    Here we want to include our RHSSO configuration and the Openshift Router CA
+  params:
+  - name: RHSSO_DOMAIN
+    description: Your RHSSO url
+    type: string
+    default: "https://keycloak-dso.apps-crc.testing"
+  - name: REALM
+    description: Your RHSSO Realm
+    type: string
+    default: "openshift-realm"
+  - name: QUAYECOSYSTEM_NAME
+    description: The name defined in your Quay EcoSystem Custom Resource
+    type: string
+    default: "quayecosystem"
+  - name: CLAIR_NAME
+    description: The name you defined for clair in the Quay Ecosystem CRD
+    type: string
+    default: "clair"
+  - name: DOMAIN
+    description: Quay's Route URL
+    type: string
+    default: "quayecosystem-quay-dso.apps-crc.testing"
+  - name: SERVICE_NAME
+    description: How SSO will be named on the Login Page of Quay
+    type: string
+    default: "Red Hat SSO"
+  - name: CLIENT_ID
+    description: Keycloak Client ID
+    type: string
+    default: "quay"
+  - name: CLIENT_SECRET
+    description: Keycloak Client Secret
+    type: string
+    default: "openshift"
+  - name: VERSION
+    description: The OpenShift Version to use
+    type: string
+    default: '4.6'
+  steps:
+    - name: create-keycloak-client
+      env:
+        - name: secretNAMESPACE
+          valueFrom:
+            secretKeyRef:
+              key: namespace
+              name: admin-creds
+      image: quay.io/openshift/origin-cli:$(params.VERSION)
+      script: |
+        oc project $secretNAMESPACE
+        oc get secret/router-ca -o 'go-template={{index .data "tls.crt"}}'| base64 -d > router-ca.crt
+        cat > config.yaml << EOF
+        ALLOW_PULLS_WITHOUT_STRICT_LOGGING: false
+        AUTHENTICATION_TYPE: Database
+        DEFAULT_TAG_EXPIRATION: 2w
+        DISTRIBUTED_STORAGE_CONFIG:
+          default:
+          - LocalStorage
+          - storage_path: /datastorage/registry
+        ENTERPRISE_LOGO_URL: /static/img/RH_Logo_Quay_Black_UX-horizontal.svg
+        FEATURE_BUILD_SUPPORT: false
+        FEATURE_DIRECT_LOGIN: true
+        FEATURE_MAILING: false
+        REGISTRY_TITLE: Red Hat Quay
+        REGISTRY_TITLE_SHORT: Red Hat Quay
+        TAG_EXPIRATION_OPTIONS:
+        - 2w
+        TEAM_RESYNC_STALE_TIME: 60m
+        TESTING: false
+        RHSSO_LOGIN_CONFIG:
+          CLIENT_ID: $(params.CLIENT_ID)
+          CLIENT_SECRET: $(params.CLIENT_SECRET)
+          LOGIN_SCOPES:
+          - openid
+          OIDC_SERVER: $(params.RHSSO_DOMAIN)/auth/realms/$(params.REALM)/
+          SERVICE_NAME: $(params.SERVICE_NAME)
+        EOF
+        oc create secret generic custom-quay-config-bundle --from-file='extra_ca_certs_router_ca.crt'='router-ca.crt' --from-file='config.yaml'=config.yaml
+
+        

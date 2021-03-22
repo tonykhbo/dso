@@ -7,12 +7,12 @@ items:
   metadata:
     name: quay-operator
   spec:
-    channel: quay-v3.3
+    channel: quay-v3.4
     installPlanApproval: Automatic
     name: quay-operator
     source: redhat-operators
     sourceNamespace: openshift-marketplace
-
+    startingCSV: quay-operator.v3.4.3
 # Secret required to pull from quay.io
 - apiVersion: v1
   kind: Secret
