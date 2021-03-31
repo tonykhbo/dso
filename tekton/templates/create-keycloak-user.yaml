@@ -1,0 +1,21 @@
+apiVersion: keycloak.org/v1alpha1
+kind: KeycloakUser
+metadata:
+  namespace: dso
+  name: user
+  labels:
+    app: rhsso
+spec:
+  realmSelector:
+    matchLabels:
+      app: rhsso
+  user:
+    lastName: Doe
+    enabled: true
+    emailVerified: false
+    username: realm_user
+    firstName: John
+    credentials:
+      - type: password
+        value: openshift
+    email: user@example.com
