@@ -61,6 +61,7 @@ spec:
       image: quay.io/openshift/origin-cli:$(params.VERSION)
       script: |
         oc project $secretNAMESPACE
+        oc delete limitrange --all
         oc apply -f - << EOF
         apiVersion: quay.redhat.com/v1
         kind: QuayRegistry

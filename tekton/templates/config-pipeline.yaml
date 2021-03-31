@@ -36,7 +36,7 @@ spec:
     - name: create-quay-keycloak-client
       params:
         - name: DOMAIN
-          value: 'https://quayecosystem-quay-dso.apps-crc.testing/'
+          value: 'https://quayecosystem-quay-dso.apps-crc.testing'
         - name: CLIENT_NAME
           value: quay
         - name: CLIENT_ID

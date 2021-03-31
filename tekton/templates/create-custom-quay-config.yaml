@@ -2,7 +2,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
-  name: create-quay-config-yaml
+  name: create-quay-config
   labels:
     app.kubernetes.io/version: "0.1"
   annotations:
@@ -87,6 +87,8 @@ spec:
           - openid
           OIDC_SERVER: $(params.RHSSO_DOMAIN)/auth/realms/$(params.REALM)/
           SERVICE_NAME: $(params.SERVICE_NAME)
+        SUPER_USERS:
+        - quay
         EOF
         oc create secret generic custom-quay-config-bundle --from-file='extra_ca_certs_router_ca.crt'='router-ca.crt' --from-file='config.yaml'=config.yaml
 

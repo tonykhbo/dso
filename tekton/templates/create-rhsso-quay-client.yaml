@@ -17,7 +17,7 @@ spec:
   - name: DOMAIN
     description: Your url for the Quay Ecosystem
     type: string
-    default: "https://quayecosystem-quay-dso.apps-crc.testing/"
+    default: "https://quay-ecosystem-quay-dso.apps-crc.testing"
   - name: CLIENT_NAME
     description: Keycloak Client Name
     type: string
