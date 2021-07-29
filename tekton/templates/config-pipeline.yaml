@@ -33,23 +33,6 @@ spec:
       taskRef:
         kind: Task
         name: oc-copy-router-ca
-    - name: create-quay-keycloak-client
-      params:
-        - name: DOMAIN
-          value: 'https://quayecosystem-quay-dso.apps-crc.testing'
-        - name: CLIENT_NAME
-          value: quay
-        - name: CLIENT_ID
-          value: quay
-        - name: CLIENT_SECRET
-          value: openshift
-        - name: VERSION
-          value: '4.6'
-      runAfter:
-        - oc-copy-router-ca
-      taskRef:
-        kind: Task
-        name: create-quay-keycloak-client
     - name: create-ocp-keycloak-client
       params:
         - name: DOMAIN
